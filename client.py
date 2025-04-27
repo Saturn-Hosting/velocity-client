@@ -17,7 +17,11 @@ while True:
     for socks in read_sockets:
         if socks == server:
             message = socks.recv(2048)
-            print(message)
+            if not message:
+                print("\nDisconnected from chat server")
+                sys.exit()
+            else:
+                print(message.decode())
         else:
             message = sys.stdin.readline()
             server.send(message.encode())
